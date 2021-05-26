@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.809.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-backend-api", "dotnet-backend-api\dotnet-backend-api.csproj", "{B5EC6733-4E86-4877-AB2D-D06F705465FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5EC6733-4E86-4877-AB2D-D06F705465FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5EC6733-4E86-4877-AB2D-D06F705465FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5EC6733-4E86-4877-AB2D-D06F705465FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5EC6733-4E86-4877-AB2D-D06F705465FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98F1E7AB-359B-4F8C-B12C-81B078A0BE56}
+	EndGlobalSection
+EndGlobal
