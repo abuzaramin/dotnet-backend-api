@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using dotnet_backend_api.Services.MarvelService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using AutoMapper;
+using dotnet_backend_api.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotnet_backend_api
 {
@@ -26,12 +30,16 @@ namespace dotnet_backend_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddDbContext<DataContext>( options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                );
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "dotnet_backend_api", Version = "v1" });
             });
+            services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IMarvelService, MarvelService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
