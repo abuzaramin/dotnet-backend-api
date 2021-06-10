@@ -17,10 +17,14 @@ namespace dotnet_backend_api
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+  Host.CreateDefaultBuilder(args)
+    .ConfigureWebHostDefaults(webBuilder => {
+        webBuilder
+.ConfigureAppConfiguration((hostingContext, config) => {
+config.AddEnvironmentVariables(prefix: "primebird_");
+})
+.UseUrls("https://*:5001")
+.UseStartup<Startup>();
+    });
     }
 }

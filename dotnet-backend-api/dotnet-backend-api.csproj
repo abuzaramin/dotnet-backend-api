@@ -5,6 +5,11 @@
     <RootNamespace>dotnet_backend_api</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'local' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'production' " />
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.6">
@@ -23,4 +28,6 @@
     <Folder Include="Dtos\Marvel\" />
     <Folder Include="Data\" />
   </ItemGroup>
+
+  
 </Project>

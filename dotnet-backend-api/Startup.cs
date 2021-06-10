@@ -50,9 +50,13 @@ namespace dotnet_backend_api
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "dotnet_backend_api v1"));
+            } else
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "dotnet_backend_api v1"));
             }
 
-            app.UseHttpsRedirection();
+        app.UseHttpsRedirection();
 
             app.UseRouting();
 
