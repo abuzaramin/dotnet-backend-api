@@ -1,0 +1,37 @@
+﻿version: 0.2
+
+
+
+env:
+    variables:
+        PROJECT: DotNetCICDCodeBuild
+        DOTNET_CORE_RUNTIME: 5.0
+phases:   
+  install:
+    runtime-versions:
+      dotnet: ${DOTNET_CORE_RUNTIME}
+        
+      
+  pre_build:
+    commands:
+      - echo Restore started on `date`
+      - dotnet restore dotnet-backend-api.csproj
+      
+  build:
+    commands:
+      - echo Build started on `date`
+      - dotnet build -c Release
+      
+      
+  post_build:
+    commands:
+      - echo Publish started on `date`
+      # https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/dotnet-linux-platform-bundle-app.html
+      - dotnet publish -c Release -r linux-x64 -o ./build_output ./${PROJECT}/${PROJECT}.csproj --self-contained false
+      - cp Procfile ./build_ouput
+      
+artifacts:
+  files:
+    - '**/*'
+  base-directory: ./build_ouput
+  discard-paths: no
