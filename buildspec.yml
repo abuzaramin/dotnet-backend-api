@@ -33,10 +33,12 @@ phases:
       - cd build_output
       - ls
       - cd ..
+      - cd ..
       - ls
      # - cp Procfile ./build_ouput
       
 artifacts:
   files:
-    - build_output/**
-  name: dotnet-codebuild-artifacts
+    - ./${PROJECT}/bin/*
+    - Dockerfile
+  discard-paths: no
