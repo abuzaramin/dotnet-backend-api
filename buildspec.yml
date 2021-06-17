@@ -34,6 +34,5 @@ phases:
       
 artifacts:
   files:
-    - '**/*'
-  base-directory: ./build_ouput
-  discard-paths: no
+    - /build_ouput/**
+  name: dotnet-codebuild-artifacts
