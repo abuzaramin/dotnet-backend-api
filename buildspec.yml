@@ -29,9 +29,8 @@ phases:
   post_build:
     commands:
       - echo Publish started on `date`
-      # https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/dotnet-linux-platform-bundle-app.html
       - dotnet publish -c Release -r linux-x64 -o ./build_output ./${PROJECT}.csproj --self-contained false
-      - cp Procfile ./build_ouput
+     # - cp Procfile ./build_ouput
       
 artifacts:
   files:
