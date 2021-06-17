@@ -30,11 +30,13 @@ phases:
     commands:
       - echo Publish started on `date`
       - dotnet publish -c Release -r linux-x64 -o ./build_output ./${PROJECT}.csproj --self-contained false
-      - cd build_ouput
+      - cd build_output
+      - ls
+      - cd ..
       - ls
      # - cp Procfile ./build_ouput
       
 artifacts:
   files:
-    - build_ouput/**
+    - build_output/**
   name: dotnet-codebuild-artifacts
