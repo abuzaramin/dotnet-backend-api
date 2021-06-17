@@ -4,7 +4,7 @@
 
 env:
     variables:
-        PROJECT: DotNetCICDCodeBuild
+        PROJECT: dotnet-backend-api
         DOTNET_CORE_RUNTIME: 5.0
 phases:   
   install:
