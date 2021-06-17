@@ -16,8 +16,8 @@ phases:
     commands:
       - echo Restore started on `date`
       - cd ./dotnet-backend-api
-      - echo pwd
-      - echo ls
+      - pwd
+      - ls
       - dotnet restore dotnet-backend-api.csproj
       
   build:
@@ -30,6 +30,7 @@ phases:
     commands:
       - echo Publish started on `date`
       - dotnet publish -c Release -r linux-x64 -o ./build_output ./${PROJECT}.csproj --self-contained false
+      - ls
      # - cp Procfile ./build_ouput
       
 artifacts:
