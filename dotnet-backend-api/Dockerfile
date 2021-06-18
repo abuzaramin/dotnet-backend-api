@@ -6,6 +6,7 @@ WORKDIR /app
 EXPOSE 5001
 
 FROM base AS final
+RUN ls
 WORKDIR ./app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "dotnet-backend-api.dll"]
