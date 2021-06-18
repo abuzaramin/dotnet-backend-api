@@ -40,5 +40,5 @@ phases:
 artifacts:
   files:
     - ./${PROJECT}/bin/*
-    - Dockerfile
+    - dotnet-backend-api/Dockerfile
   discard-paths: no
