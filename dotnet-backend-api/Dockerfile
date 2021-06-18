@@ -6,11 +6,11 @@ WORKDIR /app
 EXPOSE 5001
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-WORKDIR /src
+WORKDIR /src/dotnet-backend-api
 COPY ["dotnet-backend-api.csproj", "./"]
 RUN dotnet restore "dotnet-backend-api.csproj"
 COPY . .
-WORKDIR "/src"
+WORKDIR "/src/dotnet-backend-api"
 RUN dotnet build "dotnet-backend-api.csproj" -c Release -o /app/build
 
 FROM build AS publish
