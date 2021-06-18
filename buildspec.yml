@@ -42,6 +42,6 @@ phases:
 artifacts:
   files:
     - Dockerfile
-    - ./bin/*
-    - ./app/*
+    - ./bin/Release/*/dotnet-backend-api.dll
+    - ./app/publish/*
   discard-paths: no
