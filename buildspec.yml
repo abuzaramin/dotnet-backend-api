@@ -35,7 +35,8 @@ phases:
       
 artifacts:
   files:
+    - Dockerfile
     - ./bin/*
     - ./app/*
-    - ./Dockerfile
+    
   discard-paths: no
