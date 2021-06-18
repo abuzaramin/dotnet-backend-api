@@ -31,12 +31,17 @@ phases:
       - echo Publish started on `date`
       - dotnet publish -c Release -r linux-x64 -o ./app/publish ./${PROJECT}.csproj --self-contained false
       - ls
-     # - cp Procfile ./build_ouput
+      - cd bin/
+      - ls
+      - cd ..
+      - cd app/
+      - ls 
+      - cd ..
+      - ls
       
 artifacts:
   files:
     - Dockerfile
     - ./bin/*
     - ./app/*
-    
   discard-paths: no
