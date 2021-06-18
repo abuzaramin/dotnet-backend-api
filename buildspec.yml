@@ -30,12 +30,12 @@ phases:
     commands:
       - echo Publish started on `date`
       - dotnet publish -c Release -r linux-x64 -o ./app/publish ./${PROJECT}.csproj --self-contained false
-      - cd build_output
       - ls
      # - cp Procfile ./build_ouput
       
 artifacts:
   files:
+    - ./bin/*
     - ./app/publish/*
     - Dockerfile
   discard-paths: no
