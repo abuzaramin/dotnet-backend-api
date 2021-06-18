@@ -43,5 +43,5 @@ artifacts:
   files:
     - Dockerfile
     - ./bin/Release/*/dotnet-backend-api.dll
-    - ./app/publish/*
+    - ./app/**/*
   discard-paths: no
