@@ -3,7 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>dotnet_backend_api</RootNamespace>
-     <PreserveCompilationContext>false</PreserveCompilationContext>
+    <PreserveCompilationContext>false</PreserveCompilationContext>
+     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
