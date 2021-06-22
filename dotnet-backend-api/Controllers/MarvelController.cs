@@ -26,6 +26,11 @@ namespace dotnet_backend_api.Controllers
         {
             return Ok(await _marvelService.GetAllMarvels());
         }
+        [HttpGet("Health")]
+        public IActionResult health()
+        {
+            return Ok();
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ServiceResponse<GetMarvelDto>>> GetSingle(int id)
