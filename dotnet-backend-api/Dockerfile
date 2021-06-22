@@ -10,6 +10,7 @@ EXPOSE 5001
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["dotnet-backend-api.dll", "./"]
+COPY . .
 RUN pwd
 RUN ls
 
