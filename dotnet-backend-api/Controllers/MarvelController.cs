@@ -27,7 +27,7 @@ namespace dotnet_backend_api.Controllers
             return Ok(await _marvelService.GetAllMarvels());
         }
         [HttpGet("Health")]
-        public IActionResult health()
+        public IActionResult Health()
         {
             return Ok();
         }
