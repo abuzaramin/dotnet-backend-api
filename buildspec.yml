@@ -29,7 +29,7 @@ phases:
   post_build:
     commands:
       - echo Publish started on `date`
-      - dotnet publish -c Release -o ./app/publish ./${PROJECT}.csproj --self-contained true
+      - dotnet publish -c Release --runtime linux-x64 -o ./app/publish ./${PROJECT}.csproj --self-contained true
       - ls
       - cd bin/
       - ls
