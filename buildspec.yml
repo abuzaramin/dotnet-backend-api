@@ -41,7 +41,5 @@ phases:
       
 artifacts:
   files:
-    - ./dotnet-backend-api/Dockerfile
-    - ./dotnet-backend-api/bin/Release/*/*/dotnet-backend-api.dll
-    - ./dotnet-backend-api/app/**/*
-  discard-paths: no
+    - ./dotnet-backend-api/**/*
+  discard-paths: yes
