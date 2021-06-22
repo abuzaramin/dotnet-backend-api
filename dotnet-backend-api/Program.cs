@@ -23,7 +23,7 @@ namespace dotnet_backend_api
 .ConfigureAppConfiguration((hostingContext, config) => {
 config.AddEnvironmentVariables(prefix: "primebird_");
 })
-.UseUrls("https://*:5001")
+.UseUrls("http://*:5000")
 .UseStartup<Startup>();
     });
     }
