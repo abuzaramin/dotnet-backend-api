@@ -9,14 +9,6 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 RUN ls
 WORKDIR /src/dotnet-backend-api
 RUN ls
-COPY ["dotnet-backend-api.csproj", "./"]
-RUN dotnet restore "dotnet-backend-api.csproj"
-COPY . .
-WORKDIR "/src/dotnet-backend-api"
-RUN dotnet build "dotnet-backend-api.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "dotnet-backend-api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
