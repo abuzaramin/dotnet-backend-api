@@ -35,6 +35,9 @@ phases:
       - ls
       - cd Release/
       - ls
+      - cd net5.0/
+      - ls
+      - cd ..
       - cd ..
       - cd ..
       - cd app/
