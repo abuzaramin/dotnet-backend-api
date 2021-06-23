@@ -42,5 +42,8 @@ phases:
       
 artifacts:
   files:
-    - ./dotnet-backend-api/**/*
+    - ./dotnet-backend-api/app/publish
+    - ./dotnet-backend-api/Dockefile
+    - ./dotnet-backend-api/taskdef.json
+    - ./dotnet-backend-api/appspec.yaml
   discard-paths: yes
