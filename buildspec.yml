@@ -37,6 +37,7 @@ phases:
       - cd app/
       - ls 
       - cd ..
+      - pwd
       - ls
       
 artifacts:
