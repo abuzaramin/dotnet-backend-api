@@ -33,6 +33,9 @@ phases:
       - ls
       - cd bin/
       - ls
+      - cd Release/
+      - ls
+      - cd ..
       - cd ..
       - cd app/
       - ls 
