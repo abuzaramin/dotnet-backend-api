@@ -30,9 +30,10 @@ namespace dotnet_backend_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           
             services.AddDbContext<DataContext>( options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-                );
+            options.UseSqlServer(GetDbConnectionString())
+           );
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -42,6 +43,27 @@ namespace dotnet_backend_api
             services.AddScoped<IMarvelService, MarvelService>();
         }
 
+        private String GetDbConnectionString()
+        {
+            String hostNameKey = Configuration.GetSection("ConnectionStrings").GetSection("HOSTNAME_KEY").Value;
+            String hostNameValue = Configuration.GetSection("ConnectionStrings").GetSection("HOSTNAME_VALUE").Value;
+            String port = Configuration.GetSection("ConnectionStrings").GetSection("PORT").Value;
+            String databaseKey = Configuration.GetSection("ConnectionStrings").GetSection("DatabaseKey").Value;
+            String databaseValue = Configuration.GetSection("ConnectionStrings").GetSection("DatabaseName").Value;
+            String userIDKey = Configuration.GetSection("ConnectionStrings").GetSection("UserIDKey").Value;
+            String userIdValue = Configuration.GetSection("ConnectionStrings").GetSection("UserIdValue").Value;
+            String passwordKey = Configuration.GetSection("ConnectionStrings").GetSection("PasswordKey").Value;
+            String passwordValue = Configuration.GetSection("ConnectionStrings").GetSection("PasswordValue").Value;
+            String trustedConnectionKey = Configuration.GetSection("ConnectionStrings").GetSection("TrustedConnectionKey").Value;
+            String trustedConnectionValue = Configuration.GetSection("ConnectionStrings").GetSection("TrustedConnectionValue").Value;
+
+            //"DefaultConnection": "Server=localhost,1433; Database=dotnet-marvel; User Id=sa ; Password=reallyStrongPwd123; Trusted_Connection=false;",
+
+            String connnection = hostNameKey + "=" + hostNameValue + "," + port + ";" + databaseKey + "=" + databaseValue + ";" + userIDKey + "=" + userIdValue + ";" + passwordKey + "=" + passwordValue + ";" + trustedConnectionKey + "=" + trustedConnectionValue + ";";
+            Console.WriteLine(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
+            Console.WriteLine(connnection);
+            return connnection;
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
