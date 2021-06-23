@@ -18,6 +18,8 @@ phases:
       - cd ./dotnet-backend-api
       - pwd
       - ls
+      - rm ./bin
+      - ls
       - dotnet restore dotnet-backend-api.csproj
       
   build:
@@ -29,7 +31,7 @@ phases:
   post_build:
     commands:
       - echo Publish started on `date`
-      - dotnet publish -c Release --runtime linux-x64 /property:PublishWithAspNetCoreTargetManifest=false -o ./app/publish ./${PROJECT}.csproj --self-contained false 
+      - dotnet publish -c Release --runtime linux-x64 /property:PublishWithAspNetCoreTargetManifest=false ./${PROJECT}.csproj --self-contained false 
       - ls
       - cd bin/
       - ls
