@@ -44,7 +44,10 @@ phases:
       - cd ..
       - cd ..
       - cd app/
-      - ls 
+      - ls
+      - cd publish/
+      - ls
+      - cd ..
       - cd ..
       - pwd
       - ls
