@@ -1,0 +1,15 @@
+﻿version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:us-east-1:544197410059:task-definition/dotnet-backend-task-definition-new:1"
+        LoadBalancerInfo:
+          ContainerName: "botnet-backend-container-new"
+          ContainerPort: 5000
+        PlatformVersion: "LATEST"
+        NetworkConfiguration:
+          AwsvpcConfiguration:
+            Subnets: ["subnet-4db2a200","subnet-cec18c91", "subnet-d7b6f6b1"]
+            SecurityGroups: ["sg-076abfae3fe1c2ae9"]
+            AssignPublicIp: "ENABLED"
