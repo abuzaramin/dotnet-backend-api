@@ -42,7 +42,7 @@ phases:
       
 artifacts:
   files:
-    - ./dotnet-backend-api/app/publish/**/*
+    - ./dotnet-backend-api/bin/Release/net5.0/linux-x64/publish/**/*
     - ./dotnet-backend-api/Dockerfile
     - ./dotnet-backend-api/taskdef.json
     - ./dotnet-backend-api/appspec.yaml
