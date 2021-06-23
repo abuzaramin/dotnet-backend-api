@@ -18,12 +18,12 @@ phases:
       - cd ./dotnet-backend-api
       - pwd
       - ls
-      - dotnet restore dotnet-backend-api.csproj
+    #  - dotnet restore dotnet-backend-api.csproj
       
   build:
     commands:
       - echo Build started on `date`
-      - dotnet build -c Release -o ./app/build
+      - dotnet build -c Release
       
       
   post_build:
@@ -43,12 +43,12 @@ phases:
       - cd ..
       - cd ..
       - cd ..
-      - cd app/
-      - ls
-      - cd publish/
-      - ls
-      - cd ..
-      - cd ..
+      #- cd app/
+      #- ls
+      #- cd publish/
+      #- ls
+      #- cd ..
+      #- cd ..
       - pwd
       - ls
       
