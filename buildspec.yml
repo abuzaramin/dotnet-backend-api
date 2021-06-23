@@ -18,8 +18,6 @@ phases:
       - cd ./dotnet-backend-api
       - pwd
       - ls
-      - rm ./bin
-      - ls
       - dotnet restore dotnet-backend-api.csproj
       
   build:
