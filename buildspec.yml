@@ -37,6 +37,9 @@ phases:
       - ls
       - cd net5.0/
       - ls
+      - cd linux-x64/
+      - ls
+      - cd ..
       - cd ..
       - cd ..
       - cd ..
