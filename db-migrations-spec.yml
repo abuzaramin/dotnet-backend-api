@@ -11,6 +11,9 @@ phases:
     commands:
       - echo Installing Entity Framework Core tools reference - .NET CLI
       - dotnet tool install --global dotnet-ef
+      - cd ./dotnet-backend-api
+      - pwd
+      - ls
       
   pre_build:
     commands:
