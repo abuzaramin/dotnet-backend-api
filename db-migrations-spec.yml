@@ -1,0 +1,25 @@
+﻿# Based on https://github.com/PrakashTrove/AWS-CodeBuild-NetCore/blob/master/buildspec.yml
+# AWS CodeBuild spec to run Entity Framework migrations before a deployment
+# In order to AWS CodeBuild has access to RDS, I had to manually setup a Inbound rule:
+# https://ctoasaservice.org/2019/01/23/aws-codebuild-and-access-to-rds/
+version: 0.2
+    
+phases:   
+  install:
+    runtime-versions:
+      dotnet: latest
+    commands:
+      - echo Installing Entity Framework Core tools reference - .NET CLI
+      - dotnet tool install --global dotnet-ef
+      
+  pre_build:
+    commands:
+      - echo ASPNETCORE_ENVIRONMENT is $ASPNETCORE_ENVIRONMENT
+      - echo $ConnectionStrings__DBContext
+      - echo Info about dbcontext
+      - dotnet ef dbcontext info
+      
+  build:
+    commands:
+      - echo Update database on `date`
+      - dotnet ef database update
