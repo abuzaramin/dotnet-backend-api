@@ -39,6 +39,9 @@ phases:
       - ls
       - cd linux-x64/
       - ls
+      - cd publish/
+      - ls
+      - cd ..
       - cd ..
       - cd ..
       - cd ..
@@ -58,5 +61,5 @@ artifacts:
     - ./dotnet-backend-api/Dockerfile
     - ./dotnet-backend-api/taskdef.json
     - ./dotnet-backend-api/appspec.yaml
-    - ../db-migrations-spec.yml
+    - ./db-migrations-spec.yml
   discard-paths: yes
