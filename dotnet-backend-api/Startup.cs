@@ -32,7 +32,7 @@ namespace dotnet_backend_api
         {
            
             services.AddDbContext<DataContext>( options =>
-            options.UseSqlServer(GetDbConnectionString())
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
            );
             services.AddControllers();
             services.AddSwaggerGen(c =>
