@@ -32,7 +32,7 @@ namespace dotnet_backend_api
         {
            
             services.AddDbContext<DataContext>( options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            options.UseSqlServer(GetDbConnectionString())
            );
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -59,7 +59,8 @@ namespace dotnet_backend_api
 
             //"DefaultConnection": "Server=localhost,1433; Database=dotnet-marvel; User Id=sa ; Password=reallyStrongPwd123; Trusted_Connection=false;",
 
-            String connnection = hostNameKey + "=" + hostNameValue + "," + port + ";" + databaseKey + "=" + databaseValue + ";" + userIDKey + "=" + userIdValue + ";" + passwordKey + "=" + passwordValue + ";" + trustedConnectionKey + "=" + trustedConnectionValue + ";";
+            // String connnection = hostNameKey + "=" + hostNameValue + "," + port + ";" + databaseKey + "=" + databaseValue + ";" + userIDKey + "=" + userIdValue + ";" + passwordKey + "=" + passwordValue + ";" + trustedConnectionKey + "=" + trustedConnectionValue + ";";
+            String connnection = Configuration.GetConnectionString("DefaultConnection");
             Console.WriteLine(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
             Console.WriteLine(connnection);
             return connnection;
