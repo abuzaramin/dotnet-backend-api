@@ -29,6 +29,50 @@
         {
           "name": "ASPNETCORE_ENVIRONMENT",
           "value": "Production"
+        },
+        {
+          "name": "ConnectionStrings:DatabaseKey",
+          "value": "Database"
+        },
+        {
+          "name": "ConnectionStrings:DatabaseName",
+          "value": "botnet-database"
+        },
+        {
+          "name": "ConnectionStrings:HOSTNAME_KEY",
+          "value": "Server"
+        },
+        {
+          "name": "ConnectionStrings:HOSTNAME_VALUE",
+          "value": "botnet-database.csxuyiuz2bnj.us-east-1.rds.amazonaws.com"
+        },
+        {
+          "name": "ConnectionStrings:PasswordKey",
+          "value": "Password"
+        },
+        {
+          "name": "ConnectionStrings:PasswordValue",
+          "value": "admin1234"
+        },
+        {
+          "name": "ConnectionStrings:PORT",
+          "value": "1433"
+        },
+        {
+          "name": "ConnectionStrings:TrustedConnectionKey",
+          "value": "Trusted_Connection"
+        },
+        {
+          "name": "ConnectionStrings:TrustedConnectionValue",
+          "value": "false"
+        },
+        {
+          "name": "ConnectionStrings:UserIdValue",
+          "value": "admin"
+        },
+        {
+          "name": "ConnectionStrings:UserIDKey",
+          "value": "User Id"
         }
       ],
       "resourceRequirements": null,
@@ -69,8 +113,8 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:544197410059:task-definition/dotnet-backend-task-definition-new:1",
-  "family": "dotnet-backend-task-definition-new",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:544197410059:task-definition/dotnet-backend-task-definition-new2:1",
+  "family": "dotnet-backend-task-definition-new2",
   "requiresAttributes": [
     {
       "targetId": null,
