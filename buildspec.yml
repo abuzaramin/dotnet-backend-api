@@ -58,4 +58,5 @@ artifacts:
     - ./dotnet-backend-api/Dockerfile
     - ./dotnet-backend-api/taskdef.json
     - ./dotnet-backend-api/appspec.yaml
+    - ../db-migrations-spec.yml
   discard-paths: yes
