@@ -113,7 +113,7 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:544197410059:task-definition/dotnet-backend-task-definition-new2:1",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:544197410059:task-definition/dotnet-backend-task-definition-new2:2",
   "family": "dotnet-backend-task-definition-new2",
   "requiresAttributes": [
     {
@@ -177,7 +177,7 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "256",
-  "revision": 1,
+  "revision": 2,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
