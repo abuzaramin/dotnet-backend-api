@@ -10,12 +10,18 @@ phases:
   install:
     runtime-versions:
       dotnet: ${DOTNET_CORE_RUNTIME}
+      - echo Installing Entity Framework Core tools reference - .NET CLI
+      - dotnet tool install --global dotnet-ef
         
       
   pre_build:
     commands:
       - echo Restore started on `date`
       - cd ./dotnet-backend-api
+      - echo ASPNETCORE_ENVIRONMENT is $ASPNETCORE_ENVIRONMENT
+      - echo $ConnectionStrings__DBContext
+      - echo Info about dbcontext
+      - dotnet ef dbcontext info
       - pwd
       - ls
     #  - dotnet restore dotnet-backend-api.csproj
@@ -23,6 +29,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
+      - dotnet ef database update
     #  - dotnet build -c Release
       
       
