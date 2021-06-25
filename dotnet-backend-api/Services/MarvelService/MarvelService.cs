@@ -42,9 +42,22 @@ namespace dotnet_backend_api.Services.MarvelService
         public async Task<ServiceResponse<List<GetMarvelDto>>> GetAllMarvels()
         {
             var serviceResponse = new ServiceResponse<List<GetMarvelDto>>();
-            var dbMarvels = await _context.Marvels.ToListAsync();
-            serviceResponse.Data = dbMarvels.Select(c => _mapper.Map<GetMarvelDto>(c)).ToList();
+            try
+            {
+                Console.WriteLine(Environment.GetEnvironmentVariable("In Service fetching"));
+                var dbMarvels = await _context.Marvels.ToListAsync();
+                Console.WriteLine(Environment.GetEnvironmentVariable("After fetch"));
+                serviceResponse.Data = dbMarvels.Select(c => _mapper.Map<GetMarvelDto>(c)).ToList();
+                return serviceResponse;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(Environment.GetEnvironmentVariable("Exception is " + ex.Message));
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
             return serviceResponse;
+            
         }
 
         public async Task<ServiceResponse<GetMarvelDto>> GetMarvelById(int id)
