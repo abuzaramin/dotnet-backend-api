@@ -21,7 +21,7 @@ namespace dotnet_backend_api.Controllers
               _marvelService = marvelService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet]
         public async Task<ActionResult<ServiceResponse<List<GetMarvelDto>>>> Get()
         {
             Console.WriteLine(Environment.GetEnvironmentVariable("In Controller"));
