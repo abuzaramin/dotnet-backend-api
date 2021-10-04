@@ -5,14 +5,17 @@ using Microsoft.Extensions.Configuration;
 
 namespace dotnet_backend_api.Data
 {
+
+    
+
     public class DataContext : DbContext
-    { 
+    {
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
 
-        public DbSet<Marvel> Marvels { get; set; }
+        public virtual DbSet<Marvel> Marvels { get; set; }
     }
 }
