@@ -5,9 +5,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace dotnet_backend_api.Data
 {
-
-    
-
     public class DataContext : DbContext
     {
 
