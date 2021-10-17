@@ -54,6 +54,7 @@ phases:
       - cd ..
       - cd ..
       - cd ..
+      - dotnet test
       #- cd app/
       #- ls
       #- cd publish/
