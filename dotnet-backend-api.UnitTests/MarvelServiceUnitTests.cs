@@ -15,6 +15,7 @@ using System;
 
 namespace dotnet_backend_api.UnitTests
 {
+   
     public static class DbContextMock
     {
         public static DbSet<T> GetQueryableMockDbSet<T>(List<T> sourceList) where T : class
@@ -95,7 +96,7 @@ namespace dotnet_backend_api.UnitTests
         }
 
         [Test]
-        public void Test_GetAllMarvels_NotNull()
+        public async Task Test_GetAllMarvels_NotNull()
         {
             Marvel marvel = createMarvelObject();
 
@@ -117,16 +118,17 @@ namespace dotnet_backend_api.UnitTests
 
             marvelService = new MarvelService(mapper, datamock.Object);
 
-            Task<ServiceResponse<List<GetMarvelDto>>> marvelsDTOs = marvelService.GetAllMarvels();
+            var marvelsDTOs = await marvelService.GetAllMarvels();
+            
 
-            Assert.IsNotNull(marvelsDTOs.Result.Data);
-            Assert.IsTrue(marvelsDTOs.Result.Success);
+            Assert.IsNotNull(marvelsDTOs.Data);
+            Assert.IsTrue(marvelsDTOs.Success);
 
 
         }
 
         [Test]
-        public void Test_GetAllMarvels_Exception()
+        public async Task Test_GetAllMarvels_Exception()
         {
             Marvel marvel = createMarvelObject();
 
@@ -149,15 +151,15 @@ namespace dotnet_backend_api.UnitTests
 
             marvelService = new MarvelService(mapper, datamock.Object);
 
-            Task<ServiceResponse<List<GetMarvelDto>>> marvelsDTOs = marvelService.GetAllMarvels();
+            var marvelsDTOs = await marvelService.GetAllMarvels();
 
-            Assert.IsFalse(marvelsDTOs.Result.Success);
-            Assert.AreEqual(marvelsDTOs.Result.Message, e.Message);
+            Assert.IsFalse(marvelsDTOs.Success);
+            Assert.AreEqual(marvelsDTOs.Message, e.Message);
 
         }
 
         [Test]
-        public void Test_AddMarvels_NotNull()
+        public async Task Test_AddMarvels_NotNull()
         {
             AddMarvelDto addMarvel = createAddMarvelObject();
 
@@ -181,16 +183,17 @@ namespace dotnet_backend_api.UnitTests
 
             marvelService = new MarvelService(mapper, datamock.Object);
 
-            Task<ServiceResponse<GetMarvelDto>> marvelsDTOs = marvelService.AddMarvel(addMarvel);
+            var marvelsDTOs = await marvelService.AddMarvel(addMarvel);
+      
 
-            Assert.IsNotNull(marvelsDTOs.Result.Data.Id);
-            Assert.AreSame(marvelsDTOs.Result.Data.Name, addMarvel.Name);
-            Assert.IsTrue(marvelsDTOs.Result.Success);
+            Assert.IsNotNull(marvelsDTOs.Data.Id);
+            Assert.AreSame(marvelsDTOs.Data.Name, addMarvel.Name);
+            Assert.IsTrue(marvelsDTOs.Success);
 
         }
 
         [Test]
-        public void Test_GetMarvelByID_NotNull()
+        public async Task Test_GetMarvelByID_NotNull()
         {
             Marvel marvel = createMarvelObject();
 
@@ -215,17 +218,15 @@ namespace dotnet_backend_api.UnitTests
 
             marvelService = new MarvelService(mapper, datamock.Object);
 
-            Task<ServiceResponse<GetMarvelDto>> marvelsDTOs = marvelService.GetMarvelById(1);
+            var marvelsDTOs = await marvelService.GetMarvelById(1);
 
-            System.Console.WriteLine("Hello <<< " + marvelsDTOs.Result.Data.Id);
-            Console.ReadLine();
-            Assert.IsNotNull(marvelsDTOs.Result.Data.Id);
-            Assert.IsTrue(marvelsDTOs.Result.Success);
+            Assert.IsNotNull(marvelsDTOs.Data.Id);
+            Assert.IsTrue(marvelsDTOs.Success);
 
         }
 
         [Test]
-        public void Test_UpdateMarvel_NotNull()
+        public async Task Test_UpdateMarvel_NotNull()
         {
             UpdateMarvelDto updateMarvel = createUpdateMarvelDTO();
 
@@ -249,17 +250,17 @@ namespace dotnet_backend_api.UnitTests
             datamock.Setup(dc => dc.SaveChangesAsync(default)).Returns(Task.FromResult(1));
             marvelService = new MarvelService(mapper, datamock.Object);
 
-            Task<ServiceResponse<GetMarvelDto>> marvelsDTOs = marvelService.UpdateMarvel(updateMarvel);
+            var marvelsDTOs = await marvelService.UpdateMarvel(updateMarvel);
+            
 
-            System.Console.WriteLine("Hello <<< " + marvelsDTOs.Result.Data.Id);
-            Console.ReadLine();
-            Assert.IsNotNull(marvelsDTOs.Result.Data.Id);
-            Assert.IsTrue(marvelsDTOs.Result.Success);
+       
+            Assert.IsNotNull(marvelsDTOs.Data.Id);
+            Assert.IsTrue(marvelsDTOs.Success);
 
         }
 
         [Test]
-        public void Test_UpdateMarvel_Exception()
+        public async Task Test_UpdateMarvel_Exception()
         {
             UpdateMarvelDto updateMarvel = createUpdateMarvelDTO();
 
@@ -284,15 +285,16 @@ namespace dotnet_backend_api.UnitTests
             datamock.Setup(dc => dc.SaveChangesAsync(default)).Throws(e);
             marvelService = new MarvelService(mapper, datamock.Object);
 
-            Task<ServiceResponse<GetMarvelDto>> marvelsDTOs = marvelService.UpdateMarvel(updateMarvel);
+            var marvelsDTOs = await marvelService.UpdateMarvel(updateMarvel);
+            
 
-            Assert.IsFalse(marvelsDTOs.Result.Success);
-            Assert.AreEqual(marvelsDTOs.Result.Message, e.Message);
+            Assert.IsFalse(marvelsDTOs.Success);
+            Assert.AreEqual(marvelsDTOs.Message, e.Message);
 
         }
 
         [Test]
-        public void Test_DeleteMarvel_NotNull()
+        public async Task Test_DeleteMarvel_NotNull()
         { 
 
             var datamock = new Mock<DataContext>(dbContextOptions);
@@ -316,15 +318,16 @@ namespace dotnet_backend_api.UnitTests
             datamock.Setup(dc => dc.SaveChangesAsync(default)).Returns(Task.FromResult(1));
             marvelService = new MarvelService(mapper, datamock.Object);
 
-            Task<ServiceResponse<List<GetMarvelDto>>> marvelsDTOs = marvelService.DeleteMarvel(1);
+            var marvelsDTOs = await marvelService.DeleteMarvel(1);
+           
 
-            Assert.IsNotNull(marvelsDTOs.Result.Data.FirstOrDefault().Id);
-            Assert.IsTrue(marvelsDTOs.Result.Success);
+            Assert.IsNotNull(marvelsDTOs.Data.FirstOrDefault().Id);
+            Assert.IsTrue(marvelsDTOs.Success);
 
         }
 
         [Test]
-        public void Test_DeleteMarvel_Exception()
+        public async Task Test_DeleteMarvel_Exception()
         {
 
             var datamock = new Mock<DataContext>(dbContextOptions);
@@ -349,10 +352,10 @@ namespace dotnet_backend_api.UnitTests
             datamock.Setup(dc => dc.SaveChangesAsync(default)).Throws(e);
             marvelService = new MarvelService(mapper, datamock.Object);
 
-            Task<ServiceResponse<List<GetMarvelDto>>> marvelsDTOs = marvelService.DeleteMarvel(1);
+            var marvelsDTOs = await marvelService.DeleteMarvel(1);
 
-            Assert.IsFalse(marvelsDTOs.Result.Success);
-            Assert.AreEqual(marvelsDTOs.Result.Message, e.Message);
+            Assert.IsFalse(marvelsDTOs.Success);
+            Assert.AreEqual(marvelsDTOs.Message, e.Message);
 
         }
     }
