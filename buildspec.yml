@@ -1,15 +1,21 @@
 ﻿version: 0.2
 
-
-
 env:
     variables:
         PROJECT: dotnet-backend-api
         DOTNET_CORE_RUNTIME: 5.0
+
+    secrets-manager:
+        LOGIN: prod/sonar:sonartoken
+        HOST: prod/sonar:HOST
+        Organization: prod/sonar:Organization
+        Project: prod/sonar:Project
+
 phases:   
   install:
     runtime-versions:
       dotnet: ${DOTNET_CORE_RUNTIME}
+
     commands:
       - echo Installing Entity Framework Core tools reference - .NET CLI
       - dotnet tool install --global dotnet-ef
@@ -25,15 +31,23 @@ phases:
       - dotnet ef dbcontext info
       - pwd
       - ls
+      - apt-get update
+      - apt-get install -y jq
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
+      - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
+      - export PATH=$PATH:/sonar-scanner-3.3.0.1492-linux/bin/
     #  - dotnet restore dotnet-backend-api.csproj
       
   build:
     commands:
       - echo Build started on `date`
       - dotnet ef database update
-    #  - dotnet build -c Release
-      
-      
+      - dotnet sonarscanner end -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization
+      - sleep 5
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
+      - cat result.json
+      - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
+
   post_build:
     commands:
       - echo Publish started on `date`
