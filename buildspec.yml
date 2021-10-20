@@ -42,8 +42,8 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - dotnet ef database update
       - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Project /o:$Organization
+      - dotnet ef database update
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
       - cat result.json
@@ -52,7 +52,8 @@ phases:
   post_build:
     commands:
       - echo Publish started on `date`
-      - dotnet publish -c Release --runtime linux-x64 /property:PublishWithAspNetCoreTargetManifest=false ./${PROJECT}.csproj --self-contained false 
+      - dotnet publish -c Release --runtime linux-x64 /property:PublishWithAspNetCoreTargetManifest=false ./${PROJECT}.csproj --self-contained false
+      - dotnet sonarscanner end
       - ls
       - cd bin/
       - ls
