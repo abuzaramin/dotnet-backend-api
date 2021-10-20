@@ -6,10 +6,10 @@ env:
         DOTNET_CORE_RUNTIME: 5.0
 
     secrets-manager:
-        LOGIN: dotnet-backend-secrets/sonar:sonartoken
-        HOST: dotnet-backend-secrets/sonar:HOST
-        Organization: dotnet-backend-secrets/sonar:Organization
-        Project: dotnet-backend-secrets/sonar:Project
+        LOGIN: dotnet-backend-secrets/sonartoken
+        HOST: dotnet-backend-secrets/HOST
+        Organization: dotnet-backend-secrets/Organization
+        Project: dotnet-backend-secrets/Project
 
 phases:   
   install:
