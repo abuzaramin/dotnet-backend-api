@@ -19,6 +19,7 @@ phases:
     commands:
       - echo Installing Entity Framework Core tools reference - .NET CLI
       - dotnet tool install --global dotnet-ef
+      - dotnet tool install --global dotnet-sonarscanner
         
       
   pre_build:
