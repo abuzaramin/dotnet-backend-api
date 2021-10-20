@@ -49,12 +49,12 @@ phases:
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
       - cat result.json
       - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
+      - dotnet sonarscanner end /d:sonar.login=$LOGIN
 
   post_build:
     commands:
       - echo Publish started on `date`
       - dotnet publish -c Release --runtime linux-x64 /property:PublishWithAspNetCoreTargetManifest=false ./${PROJECT}.csproj --self-contained false
-      - dotnet sonarscanner end
       - ls
       - cd bin/
       - ls
