@@ -42,7 +42,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Project /o:$Organization
+      - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Project /o:$Organization /n:dotnet-backend-api
       - dotnet ef database update
       - dotnet build
       - dotnet test
