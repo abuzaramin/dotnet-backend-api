@@ -9,7 +9,7 @@ env:
         LOGIN: dotnet-backend-secrets:sonartoken
         HOST: dotnet-backend-secrets:HOST
         Organization: dotnet-backend-secrets:Organization
-        Project: dotnet-backend-secrets:Project
+        Projectkey: dotnet-backend-secrets:Project
 
 phases:   
   install:
@@ -42,14 +42,14 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Project /o:$Organization /n:dotnet-backend-api
+      - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Projectkey /o:$Organization /n:dotnet-backend-api
       - dotnet ef database update
       - dotnet build
       - dotnet test
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
       - cat result.json
-      - if [ ${jq -r '.projectStatus.status' result.json} = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 2 ;fi
+      - if [ ${jq -r '.projectStatus.status' result.json} = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
       - dotnet sonarscanner end /d:sonar.login=$LOGIN
 
   post_build:
