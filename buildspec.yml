@@ -45,7 +45,7 @@ phases:
       - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Projectkey /o:$Organization /n:dotnet-backend-api
       - dotnet ef database update
       - dotnet build
-      - dotnet test
+      - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Projectkey >result.json
       - cat result.json
@@ -72,7 +72,6 @@ phases:
       - cd ..
       - cd ..
       - cd ..
-      - dotnet test
       #- cd app/
       #- ls
       #- cd publish/
