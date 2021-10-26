@@ -20,6 +20,7 @@ phases:
       - echo Installing Entity Framework Core tools reference - .NET CLI
       - dotnet tool install --global dotnet-ef
       - dotnet tool install --global dotnet-sonarscanner
+      - dotnet tool update dotnet-reportgenerator-globaltool -g --version 4.8.7
       - apt-get update
       - apt-get install -y jq
         
@@ -40,9 +41,10 @@ phases:
     commands:
       - echo Build started on `date`
       - dotnet ef database update
-      - dotnet build
-      - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
       - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Projectkey /o:$Organization /n:dotnet-backend-api /d:sonar.cs.opencover.reportsPaths= opencoverCoverage.xml
+      - dotnet build
+      - dotnet test --no-build --collect:"XPlat Code Coverage" reportgenerator "-reports:*\TestResults\*\coverage.cobertura.xml" "-targetdir:sonarqubecoverage" "-reporttypes:SonarQube"
+     # - dotnet test  --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./coverage/ /p:MergeWith=./coverage/ --collect "Code coverage"
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Projectkey >result.json
       - cat result.json
