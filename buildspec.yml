@@ -32,6 +32,7 @@ phases:
       - echo $ConnectionStrings__DBContext
       - echo Info about dbcontext
       - dotnet ef dbcontext info
+      - SONAR_SCANNER_OPTS = "-Djava.net.useSystemProxies=true"
       - pwd
       - ls
       
