@@ -47,10 +47,10 @@ phases:
       - dotnet build
       - cd ..
       - ls
-      - dotnet test dotnet-backend-api.UnitTests --verbosity d --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:MergeWith=./coverage/ --collect:"XPlat Code Coverage"
+      - dotnet test dotnet-backend-api.UnitTests --verbosity d --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage"
       - pwd
       - ls
-      - reportgenerator "-reports:*/coverage/coverage.cobertura.xml" "-targetdir:sonarqubecoverage" "-reporttypes:SonarQube"
+      - reportgenerator "-reports:dotnet-backend-api.UnitTests/TestResults/*/coverage.cobertura.xml" "-targetdir:sonarqubecoverage" "-reporttypes:SonarQube"
       #- dotnet test  --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:MergeWith=./coverage/ --collect "Code coverage"
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Projectkey >result.json
