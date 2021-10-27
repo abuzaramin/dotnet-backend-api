@@ -41,7 +41,7 @@ phases:
     commands:
       - echo Build started on `date`
       - dotnet ef database update
-      - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Projectkey /o:$Organization /n:dotnet-backend-api /d:sonar.cs.opencover.reportsPaths="**\TestResults\*\*.xml"
+      - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Projectkey /o:$Organization /n:dotnet-backend-api /d:sonar.cs.opencover.reportsPaths="**/TestResults/*/*.xml"
       - dotnet build
       - dotnet test --no-build --collect:"XPlat Code Coverage"
       - reportgenerator "-reports:*/TestResults/*/coverage.cobertura.xml" "-targetdir:sonarqubecoverage" "-reporttypes:SonarQube"
