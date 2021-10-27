@@ -56,6 +56,7 @@ phases:
       - ls 
       - reportgenerator "-reports:dotnet-backend-api.UnitTests/TestResults/*/coverage.cobertura.xml" "-targetdir:dotnet-backend-api/sonarqubecoverage" "-reporttypes:SonarQube"
       - cd dotnet-backend-api
+      - ls 
       #- dotnet test  --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:MergeWith=./coverage/ --collect "Code coverage"
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Projectkey >result.json
@@ -63,7 +64,7 @@ phases:
       - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
       - dotnet sonarscanner end /d:sonar.login=$LOGIN
       - pwd
-      - ls
+      - ls sonarqubecoverage/
      
 
   post_build:
