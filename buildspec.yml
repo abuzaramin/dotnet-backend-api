@@ -46,7 +46,10 @@ phases:
       - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Projectkey /o:$Organization /n:dotnet-backend-api /d:sonar.coverageReportPaths="./sonarqubecoverage/SonarQube.xml"
       - dotnet build
       - cd ..
-      - dotnet test --verbosity d --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:MergeWith=./coverage/ --collect:"XPlat Code Coverage"
+      - ls
+      - dotnet test dotnet-backend-api.UnitTests.csproj --verbosity d --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:MergeWith=./coverage/ --collect:"XPlat Code Coverage"
+      - pwd
+      - ls
       - reportgenerator "-reports:*/coverage/coverage.cobertura.xml" "-targetdir:sonarqubecoverage" "-reporttypes:SonarQube"
       #- dotnet test  --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:MergeWith=./coverage/ --collect "Code coverage"
       - sleep 5
