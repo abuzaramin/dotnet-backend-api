@@ -47,7 +47,7 @@ phases:
       - dotnet build
       - cd ..
       - ls
-      - dotnet test dotnet-backend-api.UnitTests.csproj --verbosity d --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:MergeWith=./coverage/ --collect:"XPlat Code Coverage"
+      - dotnet test dotnet-backend-api.UnitTests --verbosity d --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:MergeWith=./coverage/ --collect:"XPlat Code Coverage"
       - pwd
       - ls
       - reportgenerator "-reports:*/coverage/coverage.cobertura.xml" "-targetdir:sonarqubecoverage" "-reporttypes:SonarQube"
