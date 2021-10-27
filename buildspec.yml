@@ -41,10 +41,10 @@ phases:
     commands:
       - echo Build started on `date`
       - dotnet ef database update
-      - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Projectkey /o:$Organization /n:dotnet-backend-api /d:sonar.cs.opencover.reportsPaths="**/TestResults/*/*.xml"
+      - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Projectkey /o:$Organization /n:dotnet-backend-api /d:sonar.cs.opencover.reportsPaths="./TestResults/*/*.xml" /d:sonar.coverageReportPaths="./sonarqubecoverage/SonarQube.xml"
       - dotnet build
       - dotnet test --no-build --collect:"XPlat Code Coverage"
-      - reportgenerator "-reports:*/TestResults/*/coverage.cobertura.xml" "-targetdir:sonarqubecoverage" "-reporttypes:SonarQube"
+      - reportgenerator "-reports:./TestResults/*/coverage.cobertura.xml" "-targetdir:sonarqubecoverage" "-reporttypes:SonarQube"
       #- dotnet test  --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:MergeWith=./coverage/ --collect "Code coverage"
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Projectkey >result.json
