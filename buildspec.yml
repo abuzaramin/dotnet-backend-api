@@ -54,7 +54,7 @@ phases:
       - ls
       - cd ..
       - ls 
-      - reportgenerator "-reports:dotnet-backend-api.UnitTests/TestResults/*/coverage.cobertura.xml" "-targetdir:sonarqubecoverage" "-reporttypes:SonarQube"
+      - reportgenerator "-reports:dotnet-backend-api.UnitTests/TestResults/*/coverage.cobertura.xml" "-targetdir:dotnet-backend-api/sonarqubecoverage" "-reporttypes:SonarQube"
       - cd dotnet-backend-api
       #- dotnet test  --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:MergeWith=./coverage/ --collect "Code coverage"
       - sleep 5
