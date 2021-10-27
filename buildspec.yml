@@ -47,7 +47,7 @@ phases:
       - dotnet build
       - cd ..
       - ls
-      - dotnet test dotnet-backend-api.UnitTests/dotnet-backend-api.UnitTests.csproj --collect:"XPlat Code Coverage"
+      - dotnet test dotnet-backend-api.UnitTests/dotnet-backend-api.UnitTests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage"
       - pwd
       - ls
       - cd dotnet-backend-api.UnitTests
