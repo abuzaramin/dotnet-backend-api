@@ -5,6 +5,7 @@
     <RootNamespace>dotnet_backend_api.UnitTests</RootNamespace>
 
     <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
