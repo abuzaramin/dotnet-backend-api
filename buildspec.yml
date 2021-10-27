@@ -43,7 +43,7 @@ phases:
     commands:
       - echo Build started on `date`
       - dotnet ef database update
-      - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Projectkey /o:$Organization /n:dotnet-backend-api /d:sonar.coverageReportPaths="./sonarqubecoverage/SonarQube.xml" /d:sonar.sources=. /d:sonar.scm.exclusions.disabled=true
+      - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Projectkey /o:$Organization /n:dotnet-backend-api /d:sonar.coverageReportPaths="./sonarqubecoverage/SonarQube.xml" /d:sonar.sources=. /d:sonar.scm.exclusions.disabled=true /d:sonar.exclusions=../dotnet-backend-api.UnitTests/
       - dotnet build
       - cd ..
       - ls
