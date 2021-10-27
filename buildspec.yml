@@ -45,6 +45,7 @@ phases:
       - dotnet ef database update
       - dotnet sonarscanner begin /d:sonar.login=$LOGIN /d:sonar.host.url=$HOST /k:$Projectkey /o:$Organization /n:dotnet-backend-api /d:sonar.coverageReportPaths="./sonarqubecoverage/SonarQube.xml"
       - dotnet build
+      - cd ..
       - dotnet test --verbosity d --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:MergeWith=./coverage/ --collect:"XPlat Code Coverage"
       - reportgenerator "-reports:*/coverage/coverage.cobertura.xml" "-targetdir:sonarqubecoverage" "-reporttypes:SonarQube"
       #- dotnet test  --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/ /p:MergeWith=./coverage/ --collect "Code coverage"
@@ -55,6 +56,7 @@ phases:
       - dotnet sonarscanner end /d:sonar.login=$LOGIN
       - pwd
       - ls
+      - cd ./dotnet-backend-api
 
   post_build:
     commands:
