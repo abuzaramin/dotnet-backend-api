@@ -5,6 +5,9 @@
     <RootNamespace>dotnet_backend_api</RootNamespace>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+    <IsTestProject>false</IsTestProject>
+    <SonarQubeTestProject>false</SonarQubeTestProject>
+
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -21,6 +24,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SQLServer" Version="5.0.6" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="MockQueryable.Moq" Version="5.0.1" />
+    <PackageReference Include="NunitXml.TestLogger" Version="3.0.117" />
   </ItemGroup>
 
   <ItemGroup>
