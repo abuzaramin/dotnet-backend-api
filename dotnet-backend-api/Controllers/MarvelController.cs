@@ -31,7 +31,7 @@ namespace dotnet_backend_api.Controllers
         [HttpGet("Health")]
         public IActionResult Health()
         {
-            return Ok();
+            return Ok(1);
         }
 
         [HttpGet("{id}")]
