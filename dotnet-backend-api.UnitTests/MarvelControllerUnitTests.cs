@@ -15,6 +15,7 @@ using dotnet_backend_api.Dtos.Marvel;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace dotnet_backend_api.UnitTests
 {
     public class MarvelControllerUnitTests
@@ -254,6 +255,7 @@ namespace dotnet_backend_api.UnitTests
 
             var response =  marvelController.Health();
             var okResult = response as OkObjectResult;
+
 
             Assert.IsNotNull(okResult);
             Assert.AreEqual(200, okResult.StatusCode);

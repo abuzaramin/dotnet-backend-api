@@ -3,6 +3,7 @@ namespace dotnet_backend_api.Models
 {
     public class Marvel
     {
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string RealName { get; set; }

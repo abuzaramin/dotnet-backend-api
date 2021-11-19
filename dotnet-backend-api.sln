@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-backend-api.UnitTests", "dotnet-backend-api.UnitTests\dotnet-backend-api.UnitTests.csproj", "{348F5809-1247-48C8-98B5-B2DBD3DF8A3F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-backend-api.IntegrationTests", "dotnet-backend-api.IntegrationTests\dotnet-backend-api.IntegrationTests.csproj", "{A8201675-6DEC-4B22-A363-AB7ED0BD99F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{348F5809-1247-48C8-98B5-B2DBD3DF8A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{348F5809-1247-48C8-98B5-B2DBD3DF8A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{348F5809-1247-48C8-98B5-B2DBD3DF8A3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8201675-6DEC-4B22-A363-AB7ED0BD99F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8201675-6DEC-4B22-A363-AB7ED0BD99F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8201675-6DEC-4B22-A363-AB7ED0BD99F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8201675-6DEC-4B22-A363-AB7ED0BD99F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
