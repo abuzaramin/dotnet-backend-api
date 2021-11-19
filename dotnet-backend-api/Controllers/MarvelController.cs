@@ -41,7 +41,7 @@ namespace dotnet_backend_api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<List<GetMarvelDto>>>> AddCharacter(AddMarvelDto newCharacter)
+        public async Task<ActionResult<ServiceResponse<GetMarvelDto>>> AddCharacter(AddMarvelDto newCharacter)
         {
 
             return Ok(await _marvelService.AddMarvel(newCharacter));

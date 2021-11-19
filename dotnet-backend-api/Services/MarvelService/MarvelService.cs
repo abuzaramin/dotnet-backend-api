@@ -80,6 +80,7 @@ namespace dotnet_backend_api.Services.MarvelService
                 marvel.CreatedBy = updatedMarvel.CreatedBy;
                 marvel.Publisher = updatedMarvel.Publisher;
                 marvel.ImageURL = updatedMarvel.ImageURL;
+                marvel.Bio = updatedMarvel.Bio;
                 await _context.SaveChangesAsync();
                 serviceRespoonse.Data = _mapper.Map<GetMarvelDto>(marvel);
             }
