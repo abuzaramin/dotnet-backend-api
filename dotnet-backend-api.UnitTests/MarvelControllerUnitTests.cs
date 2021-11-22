@@ -217,6 +217,30 @@ namespace dotnet_backend_api.UnitTests
         }
 
         [Test]
+        public async Task Test_UpdateCharacter_NotFound()
+        {
+
+            UpdateMarvelDto updateMarvelDto = createUpdateMarvelDTO();
+
+            var datamock = new Mock<DataContext>(dbContextOptions);
+
+            var serviceMock = new Mock<IMarvelService>();
+
+            var serviceResponse = new ServiceResponse<GetMarvelDto>();
+            serviceResponse.Data = null;
+
+            serviceMock.Setup(service => service.UpdateMarvel(updateMarvelDto)).Returns(Task.FromResult(serviceResponse));
+
+            marvelController = new MarvelController(serviceMock.Object);
+            var response = await marvelController.UpdateCharacter(updateMarvelDto);
+
+            NotFoundObjectResult notFoundResult = (NotFoundObjectResult)response.Result;
+
+            Assert.AreEqual(404, notFoundResult.StatusCode);
+         
+        }
+
+        [Test]
         public async Task Test_DeleteCharacter_NotNull()
         {
             GetMarvelDto getMarvelDTO = createGetMarvelDTO();
@@ -243,6 +267,29 @@ namespace dotnet_backend_api.UnitTests
             var returnedServiceResponse = (ServiceResponse<List<GetMarvelDto>>)okResult.Value;
             Assert.AreEqual(returnedServiceResponse.Data.FirstOrDefault().Id , 1);
             Assert.NotNull(returnedServiceResponse.Data.FirstOrDefault().Id);
+
+        }
+
+        [Test]
+        public async Task Test_DeleteCharacter_NotFound()
+        {
+
+            var datamock = new Mock<DataContext>(dbContextOptions);
+
+            var serviceMock = new Mock<IMarvelService>();
+
+            var serviceResponse = new ServiceResponse<List<GetMarvelDto>>();
+
+            serviceResponse.Data = null;
+
+            serviceMock.Setup(service => service.DeleteMarvel(1)).Returns(Task.FromResult(serviceResponse));
+
+            marvelController = new MarvelController(serviceMock.Object);
+            var response = await marvelController.Delete(1);
+
+            NotFoundObjectResult notFoundResult = (NotFoundObjectResult)response.Result;
+
+            Assert.AreEqual(404, notFoundResult.StatusCode);
 
         }
 
