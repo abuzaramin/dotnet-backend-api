@@ -13,12 +13,6 @@ namespace dotnet_backend_api.Services.MarvelService
     public class MarvelService : IMarvelService
     {
 
-        private static List<Marvel> characters = new List<Marvel> {
-            new Marvel {Id = 0, Name = "Captain America"},
-            new Marvel {Id = 1, Name = "Hulk"}
-
-        };
-
         private readonly IMapper _mapper;
         private readonly DataContext _context;
 
