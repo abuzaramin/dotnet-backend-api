@@ -14,7 +14,7 @@ namespace dotnet_backend_api.Services.MarvelService
 
         Task<ServiceResponse<GetMarvelDto>> AddMarvel(AddMarvelDto newCharacter);
 
-        Task<ServiceResponse<GetMarvelDto>> UpdateMarvel(UpdateMarvelDto updatedCharacter);
+        Task<ServiceResponse<GetMarvelDto>> UpdateMarvel(UpdateMarvelDto updatedMarvel);
 
         Task<ServiceResponse<List<GetMarvelDto>>> DeleteMarvel(int id);
     }
