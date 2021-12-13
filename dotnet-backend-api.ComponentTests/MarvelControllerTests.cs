@@ -12,31 +12,50 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace dotnet_backend_api.IntegrationTests
+namespace dotnet_backend_api.ComponentTests
 {
-    public class MarvelIntegrationTests
+    public class MarvelControllerTests
     {
-       
         DbContextOptions<DataContext> dbContextOptions;
 
-        [SetUp]
+        DataContext dataContext;
+
+        IMapper mapper;
+
+        MarvelService marvelService;
+
+        MarvelController marvelController;
+
+      [SetUp]
         public void Setup()
         {
             dbContextOptions = new DbContextOptionsBuilder<DataContext>()
             .UseInMemoryDatabase(databaseName: "PrimeDb")
             .Options;
 
+            dataContext = new DataContext(dbContextOptions);
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Marvel, GetMarvelDto>();
+                cfg.CreateMap<AddMarvelDto, Marvel>();
+            });
+
+            mapper = config.CreateMapper();
+
+            marvelService = new MarvelService(mapper, dataContext);
+
+            marvelController = new MarvelController(marvelService);
+
         }
 
-        
-        public MarvelIntegrationTests()
+        public MarvelControllerTests()
         {}
-
 
         public Marvel createMarvelObject()
         {
             Marvel marvel = new Marvel();
-      
+
             marvel.Name = "Hulk";
             marvel.RealName = "Hulk Real Name";
             marvel.Team = "Avengers";
@@ -95,7 +114,7 @@ namespace dotnet_backend_api.IntegrationTests
         [Test]
         public async Task Test_GetAllMarvels_Fetch()
         {
-            DataContext dataContext = new DataContext(dbContextOptions);
+            
             Marvel marvel = createMarvelObject();
 
             dataContext.Add(marvel);
@@ -104,19 +123,7 @@ namespace dotnet_backend_api.IntegrationTests
 
             marvel = dataContext.Marvels.ToList().FirstOrDefault();
 
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Marvel, GetMarvelDto>();
-                cfg.CreateMap<AddMarvelDto, Marvel>();
-            });
 
-            IMapper mapper = config.CreateMapper();
-
-            MarvelService marvelService = new MarvelService(mapper, dataContext);
-
-            MarvelController marvelController = new MarvelController(marvelService);
-
-            
             var response = await marvelController.Get();
 
             OkObjectResult okResult = (OkObjectResult)response.Result;
@@ -141,27 +148,11 @@ namespace dotnet_backend_api.IntegrationTests
         [Test]
         public async Task Test_GetById_NotNull()
         {
-            DataContext dataContext = new DataContext(dbContextOptions);
             Marvel marvel = createMarvelObject();
 
             dataContext.Add(marvel);
-
             _ = dataContext.SaveChanges();
-
             marvel = dataContext.Marvels.ToList().FirstOrDefault();
-
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Marvel, GetMarvelDto>();
-                cfg.CreateMap<AddMarvelDto, Marvel>();
-            });
-
-            IMapper mapper = config.CreateMapper();
-
-            MarvelService marvelService = new MarvelService(mapper, dataContext);
-
-            MarvelController marvelController = new MarvelController(marvelService);
-
 
             var response = await marvelController.GetSingle(marvel.Id);
 
@@ -170,11 +161,9 @@ namespace dotnet_backend_api.IntegrationTests
             Assert.IsNotNull(okResult);
             Assert.AreEqual(200, okResult.StatusCode);
             var returnedResponse = (ServiceResponse<GetMarvelDto>)okResult.Value;
-
             Assert.AreEqual(returnedResponse.Data.Id, marvel.Id);
 
             dataContext.Remove(marvel);
-
             _ = dataContext.SaveChangesAsync();
 
         }
@@ -182,21 +171,6 @@ namespace dotnet_backend_api.IntegrationTests
         [Test]
         public async Task Test_AddMarvel_NotNull()
         {
-
-            DataContext dataContext = new DataContext(dbContextOptions);
-
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Marvel, GetMarvelDto>();
-                cfg.CreateMap<AddMarvelDto, Marvel>();
-            });
-
-            IMapper mapper = config.CreateMapper();
-
-            MarvelService marvelService = new MarvelService(mapper, dataContext);
-
-            MarvelController marvelController = new MarvelController(marvelService);
-
 
             AddMarvelDto addMarvelDto = createAddMarvelObject();
 
@@ -220,40 +194,18 @@ namespace dotnet_backend_api.IntegrationTests
         [Test]
         public async Task Test_UpdateMarvel_Success()
         {
-            DataContext dataContext = new DataContext(dbContextOptions);
-
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Marvel, GetMarvelDto>();
-                cfg.CreateMap<AddMarvelDto, Marvel>();
-            });
-
-            IMapper mapper = config.CreateMapper();
-
-
+            
             Marvel marvel = createMarvelObject();
-
             dataContext.Add(marvel);
-
             _ = dataContext.SaveChangesAsync();
 
             marvel = dataContext.Marvels.ToList().FirstOrDefault();
-
-
-            MarvelService marvelService = new MarvelService(mapper, dataContext);
-
-            MarvelController marvelController = new MarvelController(marvelService);
 
             UpdateMarvelDto updateMarvelDto = createUpdateMarvelDTO();
             updateMarvelDto.Id = marvel.Id;
             updateMarvelDto.Bio = "Updated";
 
-            System.Console.WriteLine("Updated marvel is" + updateMarvelDto.Bio);
-            System.Console.WriteLine("Updated marvel id is" + updateMarvelDto.Id);
-            System.Console.WriteLine(" marvel id is" + updateMarvelDto.Id);
-
             var response = await marvelController.UpdateCharacter(updateMarvelDto);
-
             OkObjectResult okResult = (OkObjectResult)response.Result;
 
 
@@ -262,7 +214,6 @@ namespace dotnet_backend_api.IntegrationTests
             var returnedResponse = (ServiceResponse<GetMarvelDto>)okResult.Value;
 
             Assert.AreEqual(returnedResponse.Data.Id, updateMarvelDto.Id);
-
             Assert.AreEqual(returnedResponse.Data.Bio, updateMarvelDto.Bio);
 
             dataContext.Remove(marvel);
@@ -274,15 +225,6 @@ namespace dotnet_backend_api.IntegrationTests
         [Test]
         public async Task Test_DeleteMarvel_Success()
         {
-            DataContext dataContext = new DataContext(dbContextOptions);
-
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Marvel, GetMarvelDto>();
-                cfg.CreateMap<AddMarvelDto, Marvel>();
-            });
-
-            IMapper mapper = config.CreateMapper();
 
             Marvel marvel = createMarvelObject();
 
@@ -292,10 +234,7 @@ namespace dotnet_backend_api.IntegrationTests
 
             marvel = dataContext.Marvels.ToList().FirstOrDefault();
 
-            MarvelService marvelService = new MarvelService(mapper, dataContext);
-
-            MarvelController marvelController = new MarvelController(marvelService);
-
+ 
             var response = await marvelController.Delete(marvel.Id);
 
             OkObjectResult okResult = (OkObjectResult)response.Result;
@@ -304,7 +243,7 @@ namespace dotnet_backend_api.IntegrationTests
             Assert.IsNotNull(okResult);
             Assert.AreEqual(200, okResult.StatusCode);
             var returnedResponse = (ServiceResponse<List<GetMarvelDto>>)okResult.Value;
-           
+         
             System.Console.WriteLine("Count is :" + dataContext.Marvels.ToArray().Count());
 
             Assert.AreEqual(returnedResponse.Data.ToArray().Count(), 1);
@@ -314,10 +253,7 @@ namespace dotnet_backend_api.IntegrationTests
 
 
         [TearDown]
-        public void teardown ()
-        {
-          
-        }
-
+        public void teardown()
+        { }
     }
 }

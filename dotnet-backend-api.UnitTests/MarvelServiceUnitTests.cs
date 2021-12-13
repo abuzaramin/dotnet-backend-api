@@ -35,8 +35,6 @@ namespace dotnet_backend_api.UnitTests
     {
         MarvelService marvelService;
 
-        AutoMapper.IMapper autoMapper;
-
         DataContext dataContext;
 
         DbContextOptions<DataContext> dbContextOptions;
